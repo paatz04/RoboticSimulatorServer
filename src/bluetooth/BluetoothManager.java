@@ -36,8 +36,11 @@ public class BluetoothManager extends Thread{
 
     public void run() {
         setUpServer();
-        if (isServerSetUp())
+        if (isServerSetUp()) {
+            System.out.println("BluetoothManager started");
             handleNewConnections();
+        }
+        System.out.println("BluetoothManager finished");
     }
 
     private void setUpServer() {
@@ -70,6 +73,7 @@ public class BluetoothManager extends Thread{
     private void handleNewConnections() {
         while(!isBluetoothManagerStopped()) {
             StreamConnection connection = waitForConnection();
+            System.out.println(mBluetoothConnectionManagerList.size());
             if (connection != null)
                 startBluetoothConnectionManager(connection);
         }

@@ -15,8 +15,6 @@ import java.io.IOException;
 import javax.microedition.io.StreamConnection;
 
 public class BluetoothConnectionManager extends Thread implements DataInputStreamListenerCaller{
-    private static final int EXIT_CMD = -1;
-
     private StreamConnection mConnection;
     private DataInputStreamListener mInputStreamListener;
 
@@ -26,6 +24,7 @@ public class BluetoothConnectionManager extends Thread implements DataInputStrea
 
     public void stopBluetoothConnectionManager() {
         mInputStreamListener.stopDataInputStreamListener();
+        System.out.println("Connection closed");
     }
 
     @Override
@@ -34,8 +33,13 @@ public class BluetoothConnectionManager extends Thread implements DataInputStrea
         System.out.println(received);
     }
 
+    public void dataInputStreamClosed() {
+        System.out.println("Connection closed");
+    }
+
     @Override
     public void run() {
+        System.out.println("New Connection");
         handleConnection();
     }
 
@@ -57,5 +61,6 @@ public class BluetoothConnectionManager extends Thread implements DataInputStrea
 
     private void startDataInputStreamListener(DataInputStream inputStream) {
         mInputStreamListener = new DataInputStreamListener(inputStream, this);
+        mInputStreamListener.start();
     }
 }
