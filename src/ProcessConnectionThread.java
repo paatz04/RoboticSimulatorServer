@@ -39,6 +39,7 @@ public class ProcessConnectionThread implements Runnable {
             System.out.println("waiting for input");
 
             // Now retrieve streaming data (non-blocking):
+            /*
             long startTime=System.currentTimeMillis();
             IntW mouseX = new IntW(0);
             vrep.simxGetIntegerParameter(clientID,vrep.sim_intparam_mouse_x,mouseX,vrep.simx_opmode_streaming); // Initialize streaming
@@ -48,8 +49,9 @@ public class ProcessConnectionThread implements Runnable {
                 if (ret==vrep.simx_return_ok) // After initialization of streaming, it will take a few ms before the first value arrives, so check the return code
                     System.out.format("Mouse position x: %d\n",mouseX.getValue()); // Mouse position x is actualized when the cursor is over V-REP's window
             }
+            */
 
-            // Now send some data to V-REP in a non-blocking fashion:
+            // Now send some data to V-REP non-blocking:
             vrep.simxAddStatusbarMessage(clientID,"Test: send simulator data successful",vrep.simx_opmode_oneshot);
 
             // Before closing the connection to V-REP, make sure that the last
@@ -59,7 +61,6 @@ public class ProcessConnectionThread implements Runnable {
 
             // Now close the connection to V-REP:
             vrep.simxFinish(clientID);
-
 
             while (true) {
                 int command = inputStream.read();

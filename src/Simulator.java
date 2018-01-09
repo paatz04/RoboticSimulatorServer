@@ -34,8 +34,8 @@ public class Simulator
         {
             System.out.println("Connected to remote API server");
 
-            Thread waitThread = new Thread(new WaitThread(vrep, clientID));
-            waitThread.start();
+            WaitThread waitThread = new WaitThread(vrep, clientID);
+            waitThread.run();
         }
         else {
             System.out.println("Failed connecting to remote API server");

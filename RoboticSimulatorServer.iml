@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/V-REP_PRO_EDU_V3_4_0_Linux/programming/remoteApiBindings/java/java/bluecove-2.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/bluecove-2.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,12 +19,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/V-REP_PRO_EDU_V3_4_0_Linux/programming/remoteApiBindings/java/java/bluecove-gpl-2.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/bluecove-gpl-2.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="64Bit" level="project" />
   </component>
 </module>

@@ -9,8 +9,6 @@ import coppelia.IntW;
 import coppelia.IntWA;
 import coppelia.remoteApi;
 
-//import java.util.UUID;
-
 public class WaitThread implements Runnable {
 
     private remoteApi vrep;
@@ -48,7 +46,8 @@ public class WaitThread implements Runnable {
             e.printStackTrace();
             return;
         }
-                // waiting for connection
+
+        // waiting for connection
         while(true) {
             try {
                 System.out.println("waiting for connection...");
