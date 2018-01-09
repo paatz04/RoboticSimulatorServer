@@ -16,12 +16,14 @@ import java.util.ArrayList;
 public class BluetoothManager extends Thread{
     private static final int UUID_ADDRESS = 80087355; // "04c6093b-0000-1000-8000-00805f9b34fb"
 
+    private BluetoothConnectionManagerCaller mCaller;
     private StreamConnectionNotifier mNotifier;
     private boolean mStopped = false;
     // ToDo we don't need a list, because we only support one device
     private ArrayList<BluetoothConnectionManager> mBluetoothConnectionManagerList;
 
-    public BluetoothManager() {
+    public BluetoothManager(BluetoothConnectionManagerCaller caller) {
+        mCaller = caller;
         mBluetoothConnectionManagerList = new ArrayList<>();
     }
 
@@ -73,7 +75,6 @@ public class BluetoothManager extends Thread{
     private void handleNewConnections() {
         while(!isBluetoothManagerStopped()) {
             StreamConnection connection = waitForConnection();
-            System.out.println(mBluetoothConnectionManagerList.size());
             if (connection != null)
                 startBluetoothConnectionManager(connection);
         }
@@ -93,7 +94,7 @@ public class BluetoothManager extends Thread{
     }
 
     private void startBluetoothConnectionManager(StreamConnection connection) {
-        BluetoothConnectionManager bluetoothConnectionManager = new BluetoothConnectionManager(connection);
+        BluetoothConnectionManager bluetoothConnectionManager = new BluetoothConnectionManager(connection, mCaller);
         bluetoothConnectionManager.start();
         addBluetoothConnection(bluetoothConnectionManager);
     }

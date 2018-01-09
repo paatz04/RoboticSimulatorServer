@@ -1,10 +1,4 @@
-package bluetooth;//
-// Android Praktikum
-//
-//	Robotic Arm Simulator
-//
-// 	V-REP process commands script
-//
+package bluetooth;
 
 import bluetooth.inputlistener.DataInputStreamListener;
 import bluetooth.inputlistener.DataInputStreamListenerCaller;
@@ -16,10 +10,12 @@ import javax.microedition.io.StreamConnection;
 
 public class BluetoothConnectionManager extends Thread implements DataInputStreamListenerCaller{
     private StreamConnection mConnection;
+    private BluetoothConnectionManagerCaller mCaller;
     private DataInputStreamListener mInputStreamListener;
 
-    public BluetoothConnectionManager(StreamConnection connection) {
+    BluetoothConnectionManager(StreamConnection connection, BluetoothConnectionManagerCaller caller) {
         mConnection = connection;
+        mCaller = caller;
     }
 
     public void stopBluetoothConnectionManager() {
@@ -29,8 +25,7 @@ public class BluetoothConnectionManager extends Thread implements DataInputStrea
 
     @Override
     public void receivedStringFromInputStream(String received) {
-        // ToDo
-        System.out.println(received);
+        mCaller.receivedData(received);
     }
 
     public void dataInputStreamClosed() {
