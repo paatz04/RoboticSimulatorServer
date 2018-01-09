@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2eec7d38-c304-4261-a32a-4565c068a1e8" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/RoboticSimulatorServer.java" afterPath="$PROJECT_DIR$/src/RoboticSimulatorServer.java" />
       <change beforePath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java" afterPath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java" />
-      <change beforePath="$PROJECT_DIR$/src/bluetooth/BluetoothManager.java" afterPath="$PROJECT_DIR$/src/bluetooth/BluetoothManager.java" />
+      <change beforePath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" afterPath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" />
+      <change beforePath="$PROJECT_DIR$/src/vrep/VRepController.java" afterPath="$PROJECT_DIR$/src/vrep/VRepController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +30,8 @@
       <file leaf-file-name="RoboticSimulatorServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RoboticSimulatorServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="27" column="61" lean-forward="false" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="61" />
+            <state relative-caret-position="112">
+              <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,18 +39,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BluetoothManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BluetoothManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="630">
+              <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#run#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#setUpServer#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#setLocalBluetoothDeviceDiscoverable#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#setUpServerToListenForConnections#0;class#BluetoothManager#0" expanded="false" />
+                <element signature="method#handleNewConnections#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#waitForConnection#0;class#BluetoothManager#0" expanded="false" />
+                <element signature="method#startBluetoothConnectionManager#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#addBluetoothConnection#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#stopAllBluetoothConnections#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#waitUntilAllBluetoothConnectionsAreStopped#0;class#BluetoothManager#0" expanded="false" />
@@ -63,27 +64,36 @@
       <file leaf-file-name="BluetoothConnectionManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+            <state relative-caret-position="280">
+              <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#956#957#0" expanded="true" />
-                <element signature="e#1002#1003#0" expanded="true" />
-                <element signature="e#1045#1046#0" expanded="true" />
-                <element signature="e#1100#1101#0" expanded="true" />
+                <element signature="method#BluetoothConnectionManager#0;class#BluetoothConnectionManager#0" expanded="false" />
+                <element signature="method#stopBluetoothConnectionManager#0;class#BluetoothConnectionManager#0" expanded="false" />
                 <element signature="method#run#0;class#BluetoothConnectionManager#0" expanded="false" />
                 <element signature="method#handleConnection#0;class#BluetoothConnectionManager#0" expanded="false" />
                 <element signature="method#getDataInputStream#0;class#BluetoothConnectionManager#0" expanded="false" />
+                <element signature="method#startDataInputStreamListener#0;class#BluetoothConnectionManager#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VRepController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="VRepController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/vrep/VRepController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="48" column="40" lean-forward="false" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+            <state relative-caret-position="-133">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BluetoothConnectionManagerCaller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -125,11 +135,11 @@
         <option value="$PROJECT_DIR$/src/bluetooth/DataInputStreamListener.java" />
         <option value="$PROJECT_DIR$/src/bluetooth/inputlistener/DataInputStreamListenerCaller.java" />
         <option value="$PROJECT_DIR$/src/bluetooth/inputlistener/DataInputStreamListener.java" />
-        <option value="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" />
         <option value="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java" />
-        <option value="$PROJECT_DIR$/src/RoboticSimulatorServer.java" />
-        <option value="$PROJECT_DIR$/src/vrep/VRepController.java" />
         <option value="$PROJECT_DIR$/src/bluetooth/BluetoothManager.java" />
+        <option value="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" />
+        <option value="$PROJECT_DIR$/src/vrep/VRepController.java" />
+        <option value="$PROJECT_DIR$/src/RoboticSimulatorServer.java" />
       </list>
     </option>
   </component>
@@ -258,12 +268,6 @@
               <item name="RoboticSimulatorServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="RoboticSimulatorServer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RoboticSimulatorServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RoboticSimulatorServer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="bluetooth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RoboticSimulatorServer" type="b2602c69:ProjectViewProjectNode" />
@@ -449,7 +453,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="-35" width="1922" height="1116" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -464,7 +467,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25239617" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25239617" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -529,14 +532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bluetooth/inputlistener/DataInputStreamListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -555,64 +550,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+        <state relative-caret-position="84">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java">
+    <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#956#957#0" expanded="true" />
-            <element signature="e#1002#1003#0" expanded="true" />
-            <element signature="e#1045#1046#0" expanded="true" />
-            <element signature="e#1100#1101#0" expanded="true" />
-            <element signature="method#run#0;class#BluetoothConnectionManager#0" expanded="false" />
-            <element signature="method#handleConnection#0;class#BluetoothConnectionManager#0" expanded="false" />
-            <element signature="method#getDataInputStream#0;class#BluetoothConnectionManager#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="42">
+          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RoboticSimulatorServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="27" column="61" lean-forward="false" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="61" />
+        <state relative-caret-position="112">
+          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/vrep/VRepController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="48" column="40" lean-forward="false" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        <state relative-caret-position="630">
+          <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#run#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#setUpServer#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#setLocalBluetoothDeviceDiscoverable#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#setUpServerToListenForConnections#0;class#BluetoothManager#0" expanded="false" />
+            <element signature="method#handleNewConnections#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#waitForConnection#0;class#BluetoothManager#0" expanded="false" />
+            <element signature="method#startBluetoothConnectionManager#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#addBluetoothConnection#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#stopAllBluetoothConnections#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#waitUntilAllBluetoothConnectionsAreStopped#0;class#BluetoothManager#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#BluetoothConnectionManager#0;class#BluetoothConnectionManager#0" expanded="false" />
+            <element signature="method#stopBluetoothConnectionManager#0;class#BluetoothConnectionManager#0" expanded="false" />
+            <element signature="method#run#0;class#BluetoothConnectionManager#0" expanded="false" />
+            <element signature="method#handleConnection#0;class#BluetoothConnectionManager#0" expanded="false" />
+            <element signature="method#getDataInputStream#0;class#BluetoothConnectionManager#0" expanded="false" />
+            <element signature="method#startDataInputStreamListener#0;class#BluetoothConnectionManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vrep/VRepController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-133">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

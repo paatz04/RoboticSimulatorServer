@@ -1,5 +1,5 @@
 package bluetooth;
 
 public interface BluetoothConnectionManagerCaller {
-    void receivedData(String received);
+    void receivedDataViaBluetooth(String received);
 }

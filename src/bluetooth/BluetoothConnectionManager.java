@@ -25,7 +25,7 @@ public class BluetoothConnectionManager extends Thread implements DataInputStrea
 
     @Override
     public void receivedStringFromInputStream(String received) {
-        mCaller.receivedData(received);
+        mCaller.receivedDataViaBluetooth(received);
     }
 
     public void dataInputStreamClosed() {
