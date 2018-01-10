@@ -13,17 +13,20 @@ public class VRepController extends Thread {
      */
     private final static int UPDATE_FREQUENCY_MILLI_SECONDS = 20;
 
+    private boolean mStopped = false;
+
+    private float mSpeedGrab = 0;
+    private float mSpeedTip = 0;
+    private float mSpeedBody = 0;
+    private float mSpeedRotation = 0;
+
+
     public VRepController() {
         // ToDo
     }
 
-
     public void stopVRepController() {
-        // ToDo
-    }
-
-    public void run() {
-        // ToDo
+        mStopped = true;
     }
 
     /**
@@ -31,11 +34,11 @@ public class VRepController extends Thread {
      * positive value = grabbing
      * negative value = releasing
      *
-     * @param speed
+     * @param speed - speed grab
      */
-    public void setSpeedGrab(double speed) {
+    public void setSpeedGrab(float speed) {
         System.out.println("VREP.GRAB\t" + speed);
-        // ToDo
+        mSpeedGrab = speed;
     }
 
     /**
@@ -45,11 +48,11 @@ public class VRepController extends Thread {
      *
      * Example: setSpeedTip(-3) -> the tip of the robotic arm should move with a speed of 3 units down.
      *
-     * @param speed
+     * @param speed - speed tip
      */
-    public void setSpeedTip(double speed) {
+    public void setSpeedTip(float speed) {
         System.out.println("VREP.TIP\t" + speed);
-        // ToDo
+        mSpeedTip = speed;
     }
 
     /**
@@ -57,22 +60,69 @@ public class VRepController extends Thread {
      * positive value = body up
      * negative value = body down
      *
-     * @param speed
+     * @param speed - speed body
      */
-    public void setSpeedBody(double speed) {
+    public void setSpeedBody(float speed) {
         System.out.println("VREP.BODY\t" + speed);
-        // ToDo
+        mSpeedBody = speed;
     }
 
     /**
      * If this function is called, the speed for the rotation should be changed.
      * positive value = rotation to the right
-     * positive value = rotation to the left
+     * negative value = rotation to the left
      *
-     * @param speed
+     * @param speed - speed rotation
      */
-    public void setSpeedRotation(double speed) {
+    public void setSpeedRotation(float speed) {
         System.out.println("VREP.ROTATION\t" + speed);
-        // ToDo
+        mSpeedRotation = speed;
+    }
+
+
+    public void run() {
+        while(!mStopped) {
+            moveRoboticArm();
+            sleepUntilNextRoboticArmUpdate();
+        }
+    }
+
+    private void moveRoboticArm() {
+        grab();
+        moveTip();
+        moveBody();
+        rotate();
+    }
+
+    private void grab() {
+        if (mSpeedGrab != 0) {
+            // ToDo: move the grab part of the robotic arm for mSpeedGrab units
+        }
+    }
+
+    private void moveTip() {
+        if (mSpeedTip != 0) {
+            // ToDo: move the tip part of the robotic arm for mSpeedTip units
+        }
+    }
+
+    private void moveBody() {
+        if (mSpeedBody != 0) {
+            // ToDo: move the body part of the robotic arm for mSpeedBody units
+        }
+    }
+
+    private void rotate() {
+        if (mSpeedRotation != 0) {
+            // ToDo: rotate the robotic arm for mSpeedRotation units
+        }
+    }
+
+    private void sleepUntilNextRoboticArmUpdate() {
+        try {
+            Thread.sleep(UPDATE_FREQUENCY_MILLI_SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
