@@ -34,6 +34,7 @@ public class VRepController extends Thread {
      * @param speed
      */
     public void setSpeedGrab(double speed) {
+        System.out.println("VREP.GRAB\t" + speed);
         // ToDo
     }
 
@@ -47,6 +48,7 @@ public class VRepController extends Thread {
      * @param speed
      */
     public void setSpeedTip(double speed) {
+        System.out.println("VREP.TIP\t" + speed);
         // ToDo
     }
 
@@ -58,6 +60,7 @@ public class VRepController extends Thread {
      * @param speed
      */
     public void setSpeedBody(double speed) {
+        System.out.println("VREP.BODY\t" + speed);
         // ToDo
     }
 
@@ -69,6 +72,7 @@ public class VRepController extends Thread {
      * @param speed
      */
     public void setSpeedRotation(double speed) {
+        System.out.println("VREP.ROTATION\t" + speed);
         // ToDo
     }
 }

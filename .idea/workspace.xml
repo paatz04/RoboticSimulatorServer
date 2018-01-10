@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2eec7d38-c304-4261-a32a-4565c068a1e8" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/transfer/ReceivedData.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/transfer/TransferDataConverter.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/transfer/TransferDataConverterException.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/vrep/RoboticArmPart.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/RoboticSimulatorServer.java" afterPath="$PROJECT_DIR$/src/RoboticSimulatorServer.java" />
-      <change beforePath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java" afterPath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java" />
-      <change beforePath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" afterPath="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" />
       <change beforePath="$PROJECT_DIR$/src/vrep/VRepController.java" afterPath="$PROJECT_DIR$/src/vrep/VRepController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,18 +23,18 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="19" lean-forward="true" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoboticSimulatorServer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RoboticSimulatorServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/RoboticSimulatorServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+            <state relative-caret-position="420">
+              <caret line="30" column="33" lean-forward="true" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,13 +42,51 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="TransferDataConverter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/transfer/TransferDataConverter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="17" column="137" lean-forward="false" selection-start-line="17" selection-start-column="137" selection-end-line="17" selection-end-column="137" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReceivedData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/transfer/ReceivedData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+              <folding>
+                <element signature="e#336#337#0" expanded="true" />
+                <element signature="e#374#375#0" expanded="true" />
+                <element signature="e#405#406#0" expanded="true" />
+                <element signature="e#434#435#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoboticArmPart.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/vrep/RoboticArmPart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28">
+              <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BluetoothManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state relative-caret-position="336">
+              <caret line="24" column="69" lean-forward="false" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#BluetoothManager#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#run#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#setUpServer#0;class#BluetoothManager#0" expanded="false" />
                 <element signature="method#setLocalBluetoothDeviceDiscoverable#0;class#BluetoothManager#0" expanded="false" />
@@ -64,8 +105,8 @@
       <file leaf-file-name="BluetoothConnectionManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+            <state relative-caret-position="168">
+              <caret line="12" column="53" lean-forward="true" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#BluetoothConnectionManager#0;class#BluetoothConnectionManager#0" expanded="false" />
@@ -79,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VRepController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="VRepController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/vrep/VRepController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-133">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="7">
+              <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -92,8 +133,8 @@
       <file leaf-file-name="BluetoothConnectionManagerCaller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+            <state relative-caret-position="70">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -104,8 +145,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -138,6 +180,13 @@
         <option value="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java" />
         <option value="$PROJECT_DIR$/src/bluetooth/BluetoothManager.java" />
         <option value="$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java" />
+        <option value="$PROJECT_DIR$/src/vrep/RoboticArmParts.java" />
+        <option value="$PROJECT_DIR$/src/vrep/RoboticArmPart.java" />
+        <option value="$PROJECT_DIR$/src/transfer/ReceivedData.java" />
+        <option value="$PROJECT_DIR$/src/transfer/TransferDataFormatterException.java" />
+        <option value="$PROJECT_DIR$/src/transfer/TransferDataFormatter.java" />
+        <option value="$PROJECT_DIR$/src/transfer/TransferDataConverter.java" />
+        <option value="$PROJECT_DIR$/src/transfer/TransferDataConverterException.java" />
         <option value="$PROJECT_DIR$/src/vrep/VRepController.java" />
         <option value="$PROJECT_DIR$/src/RoboticSimulatorServer.java" />
       </list>
@@ -268,6 +317,18 @@
               <item name="RoboticSimulatorServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="RoboticSimulatorServer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RoboticSimulatorServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboticSimulatorServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="transfer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RoboticSimulatorServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RoboticSimulatorServer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="vrep" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RoboticSimulatorServer" type="b2602c69:ProjectViewProjectNode" />
@@ -453,6 +514,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="-35" width="1922" height="1116" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -467,7 +529,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25239617" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25239617" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -550,38 +612,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RoboticSimulatorServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="74" column="40" lean-forward="false" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        <state relative-caret-position="336">
+          <caret line="24" column="69" lean-forward="false" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#BluetoothManager#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#run#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#setUpServer#0;class#BluetoothManager#0" expanded="false" />
             <element signature="method#setLocalBluetoothDeviceDiscoverable#0;class#BluetoothManager#0" expanded="false" />
@@ -596,10 +633,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManagerCaller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="19" lean-forward="true" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/bluetooth/BluetoothConnectionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+        <state relative-caret-position="168">
+          <caret line="12" column="53" lean-forward="true" selection-start-line="12" selection-start-column="53" selection-end-line="12" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BluetoothConnectionManager#0;class#BluetoothConnectionManager#0" expanded="false" />
@@ -612,11 +665,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/vrep/RoboticArmPart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transfer/TransferDataConverterException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding>
+            <element signature="e#134#135#0" expanded="true" />
+            <element signature="e#164#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/vrep/VRepController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-133">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state relative-caret-position="7">
+          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transfer/ReceivedData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding>
+            <element signature="e#336#337#0" expanded="true" />
+            <element signature="e#374#375#0" expanded="true" />
+            <element signature="e#405#406#0" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transfer/TransferDataConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="137" lean-forward="false" selection-start-line="17" selection-start-column="137" selection-end-line="17" selection-end-column="137" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RoboticSimulatorServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="30" column="33" lean-forward="true" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
