@@ -1,6 +1,7 @@
 package transfer;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import vrep.RoboticArmPart;
 
 public class TransferDataConverter {

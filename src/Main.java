@@ -1,6 +1,14 @@
+import vrep.VRepController;
+import vrep.VRepControllerException;
+
 public class Main {
     public static void main(String[] args) {
         RoboticSimulatorServer roboticSimulatorServer = new RoboticSimulatorServer();
-        roboticSimulatorServer.startRoboticSimulatorServer();
+        try {
+            roboticSimulatorServer.startRoboticSimulatorServer();
+        }catch (VRepControllerException e) {
+            System.out.println("Couldn't start RoboticSimulationServer.");
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
