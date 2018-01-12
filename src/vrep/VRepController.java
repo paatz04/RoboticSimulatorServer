@@ -14,7 +14,7 @@ public class VRepController extends Thread {
      *   set speed for the tip = 3 -> move the tip of the robotic arm every 20 milliseconds per 3 units up
      */
     private final static int UPDATE_FREQUENCY_MILLI_SECONDS = 20;
-    private final static String SIMULATOR_SCENE = "remoteApiCommandServer";
+    private final static String SIMULATOR_SCENE_OBJECT = "IRB140#0";
 
     private remoteApi mVrep;
     private int mClientID;
@@ -41,10 +41,6 @@ public class VRepController extends Thread {
         connectToServer();
         if (isConnectedToServer()) {
             System.out.println("Connected to V-REP API server...");
-            while(!mStopped) {
-                moveRoboticArm();
-                sleepUntilNextRoboticArmUpdate();
-            }
         } else {
             System.out.println("Failed to connect to V-REP API server...");
             System.exit(1);
@@ -71,7 +67,7 @@ public class VRepController extends Thread {
     public void setSpeedGrab(float speed) {
         System.out.println("VREP.GRAB\t" + speed);
         mInFloats.getArray()[0] = speed;
-        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
+        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
                                                 "setSpeedGrab_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null,mVrep.simx_opmode_blocking);
@@ -92,7 +88,7 @@ public class VRepController extends Thread {
     public void setSpeedTip(float speed) {
         System.out.println("VREP.TIP\t" + speed);
         mInFloats.getArray()[0] = speed;
-        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
+        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
                                                 "setSpeedTip_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null,mVrep.simx_opmode_blocking);
@@ -113,7 +109,7 @@ public class VRepController extends Thread {
     public void setSpeedBody(float speed) {
         System.out.println("VREP.BODY\t" + speed);
         mInFloats.getArray()[0] = speed;
-        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
+        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
                                                 "setSpeedBody_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null,mVrep.simx_opmode_blocking);
@@ -134,7 +130,7 @@ public class VRepController extends Thread {
     public void setSpeedRotation(float speed) {
         System.out.println("VREP.ROTATION\t" + speed);
         mInFloats.getArray()[0] = speed;
-        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
+        int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
                                                 "setSpeedRotation_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null,mVrep.simx_opmode_blocking);
@@ -156,7 +152,7 @@ public class VRepController extends Thread {
         if (mSpeedGrab != 10) {
             mInFloats.getArray()[0] = mSpeedGrab;
             int result=mVrep.simxCallScriptFunction(
-                    mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
+                    mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
                     "grab_function",null,mInFloats,
                     null,null,null,null,null,
                     null,mVrep.simx_opmode_blocking);
@@ -170,7 +166,7 @@ public class VRepController extends Thread {
         if (mSpeedTip != 0) {
             mInFloats.getArray()[0] = mSpeedTip;
             int result=mVrep.simxCallScriptFunction(
-                    mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
+                    mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
                     "moveTip_function",null,mInFloats,
                     null,null,null,null,null,
                     null,mVrep.simx_opmode_blocking);
@@ -184,7 +180,7 @@ public class VRepController extends Thread {
         if (mSpeedBody != 0) {
             mInFloats.getArray()[0] = mSpeedBody;
             int result=mVrep.simxCallScriptFunction(
-                    mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
+                    mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
                     "moveBody_function",null,mInFloats,
                     null,null,null,null,null,
                     null,mVrep.simx_opmode_blocking);
@@ -198,12 +194,12 @@ public class VRepController extends Thread {
         if (mSpeedRotation != 0) {
             mInFloats.getArray()[0] = mSpeedRotation;
             int result=mVrep.simxCallScriptFunction(
-                    mClientID,SIMULATOR_SCENE,mVrep.sim_scripttype_childscript,
-                    "moveBody_function",null,mInFloats,
+                    mClientID,SIMULATOR_SCENE_OBJECT,mVrep.sim_scripttype_childscript,
+                    "rotate_function",null,mInFloats,
                     null,null,null,null,null,
                     null,mVrep.simx_opmode_blocking);
             if (result != mVrep.simx_return_ok) {
-                System.out.format("moveBody() remote function call failed\n");
+                System.out.format("rotate() remote function call failed\n");
             }
         }
     }
