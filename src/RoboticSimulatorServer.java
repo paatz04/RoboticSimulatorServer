@@ -1,6 +1,5 @@
 import bluetooth.BluetoothConnectionManagerCaller;
 import bluetooth.BluetoothManager;
-import org.jetbrains.annotations.Nullable;
 import transfer.ReceivedData;
 import transfer.TransferDataConverter;
 import transfer.TransferDataConverterException;
@@ -61,6 +60,7 @@ public class RoboticSimulatorServer implements BluetoothConnectionManagerCaller 
             }
         }catch (VRepControllerException e) {
             System.out.println(e.getMessage());
+            stopRoboticSimulatorServer();
         }
     }
 

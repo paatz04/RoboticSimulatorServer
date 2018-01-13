@@ -6,6 +6,7 @@ import coppelia.*;
  * This class should communicate with the vRep and control the vRep. With this class an external class should be able
  * to move the robotic arm, with using only the functions of this class.
  */
+// ToDo there is no check if the server is still running
 public class VRepController {
     private final static String SIMULATOR_SCENE_OBJECT = "IRB140#0";
 

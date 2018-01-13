@@ -50,7 +50,6 @@ public class BluetoothManager extends Thread{
             setLocalBluetoothDeviceDiscoverable();
             setUpServerToListenForConnections();
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Could not set up the server");
             mNotifier = null;
         }
