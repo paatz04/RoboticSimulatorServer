@@ -18,16 +18,11 @@ public class VRepControllerClass {
 
     private static void moveGrab(VRepController vrep) throws VRepControllerException {
         // grab
-        vrep.setSpeedGrab(1);
-        sleep(2000);
         vrep.setSpeedGrab(2);
         sleep(1000);
 
-        // release
-        vrep.setSpeedGrab(-1);
-        sleep(2000);
         vrep.setSpeedGrab(-2);
-        sleep(1000);
+        //sleep(1000);
 
         // stop
         vrep.setSpeedGrab(0);
@@ -42,7 +37,7 @@ public class VRepControllerClass {
 
         // move tip up
         vrep.setSpeedTip(0.5f);
-        sleep(800);
+        //sleep(800);
         //vrep.setSpeedTip(2);
         //sleep(1000);
 
@@ -59,7 +54,7 @@ public class VRepControllerClass {
 
         // move body up
         vrep.setSpeedBody(-0.5f);
-        sleep(500);
+        //sleep(500);
         //vrep.setSpeedBody(2);
         //sleep(1000);
 
@@ -76,7 +71,7 @@ public class VRepControllerClass {
 
         // rotate left
         vrep.setSpeedRotation(-1);
-        sleep(2000);
+        //sleep(2000);
         //vrep.setSpeedRotation(-2);
         //sleep(2000);
 

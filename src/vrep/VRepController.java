@@ -113,4 +113,17 @@ public class VRepController {
         if (result != remoteApi.simx_return_ok)
             throw new VRepControllerException("setSpeedRotation() remote function call failed");
     }
+
+    /**
+     * If this function is called, grabbing/releasing is triggered.
+     */
+    public void grab() throws VRepControllerException {
+        System.out.println("VREP.GRABBING");
+        int result = mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT, remoteApi.sim_scripttype_childscript,
+                "grab_function",null,null,
+                null,null,null,null,null,
+                null, remoteApi.simx_opmode_blocking);
+        if (result != remoteApi.simx_return_ok)
+            throw new VRepControllerException("grab() remote function call failed");
+    }
 }
