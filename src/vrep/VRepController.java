@@ -6,9 +6,9 @@ import coppelia.*;
  * This class should communicate with the vRep and control the vRep. With this class an external class should be able
  * to move the robotic arm, with using only the functions of this class.
  */
-// ToDo there is no check if the server is still running
 public class VRepController {
-    private final static String SIMULATOR_SCENE_OBJECT = "IRB140#0";
+    private final static String SIMULATOR_SCENE_OBJECT = "IRB140";
+    private final static Float GRAB_SPEED_SCALE_FACTOR = 5f;
 
     private remoteApi mVrep;
     private int mClientID;
@@ -42,6 +42,15 @@ public class VRepController {
         return mVrep.simxGetConnectionId(mClientID) != -1;
     }
 
+    private void reconnectToServer() {
+        while (!isConnectedToServer()) {
+            sleep(2000);
+            System.out.println("Trying to reconnect to V-REP API server...");
+            connectToServer();
+        }
+        System.out.println("Connected to V-REP API server...");
+    }
+
     /**
      * If this function is called, the speed of grabbing/releasing should be changed.
      * positive value = grabbing
@@ -50,14 +59,15 @@ public class VRepController {
      * @param speed - speed grab
      */
     public void setSpeedGrab(float speed) throws VRepControllerException {
+        // Scale speed
+        speed = speed * GRAB_SPEED_SCALE_FACTOR;
         System.out.println("VREP.GRAB\t" + speed);
         mInFloats.getArray()[0] = speed;
         int result = mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT, remoteApi.sim_scripttype_childscript,
                                                 "setSpeedGrab_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null, remoteApi.simx_opmode_blocking);
-        if (result != remoteApi.simx_return_ok)
-            throw new VRepControllerException("setSpeedGrab() remote function call failed");
+        checkStatusCode(result, "setSpeedGrab()");
     }
 
     /**
@@ -74,8 +84,7 @@ public class VRepController {
                                                 "setSpeedTip_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null, remoteApi.simx_opmode_blocking);
-        if (result != remoteApi.simx_return_ok)
-            throw new VRepControllerException("setSpeedTip() remote function call failed");
+        checkStatusCode(result, "setSpeedTip()");
     }
 
     /**
@@ -92,8 +101,7 @@ public class VRepController {
                                                 "setSpeedBody_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null, remoteApi.simx_opmode_blocking);
-        if (result != remoteApi.simx_return_ok)
-            throw new VRepControllerException("setSpeedBody() remote function call failed");
+        checkStatusCode(result, "setSpeedBody()");
     }
 
     /**
@@ -110,20 +118,25 @@ public class VRepController {
                                                 "setSpeedRotation_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null, remoteApi.simx_opmode_blocking);
-        if (result != remoteApi.simx_return_ok)
-            throw new VRepControllerException("setSpeedRotation() remote function call failed");
+        checkStatusCode(result, "setSpeedRotation()");
     }
 
-    /**
-     * If this function is called, grabbing/releasing is triggered.
-     */
-    public void grab() throws VRepControllerException {
-        System.out.println("VREP.GRABBING");
-        int result = mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT, remoteApi.sim_scripttype_childscript,
-                "grab_function",null,null,
-                null,null,null,null,null,
-                null, remoteApi.simx_opmode_blocking);
-        if (result != remoteApi.simx_return_ok)
-            throw new VRepControllerException("grab() remote function call failed");
+    public void checkStatusCode(int statusCode, String statusMessage) throws VRepControllerException {
+        if (statusCode != remoteApi.simx_return_ok) {
+            if (!isConnectedToServer()) {
+                System.out.println("Connection to V-REP API server lost...");
+                reconnectToServer();
+            } else {
+                throw new VRepControllerException(statusMessage + " remote function call failed...");
+            }
+        }
+    }
+
+    private static void sleep(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
