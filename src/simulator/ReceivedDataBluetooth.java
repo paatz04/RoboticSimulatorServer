@@ -1,12 +1,12 @@
-package transfer;
+package simulator;
 
 import vrep.RoboticArmPart;
 
-public class ReceivedData {
+public class ReceivedDataBluetooth {
     private RoboticArmPart mRoboticArmPart;
     private float mValue;
 
-    public ReceivedData(RoboticArmPart roboticArmPart, float value) {
+    public ReceivedDataBluetooth(RoboticArmPart roboticArmPart, float value) {
         mRoboticArmPart = roboticArmPart;
         mValue = value;
     }

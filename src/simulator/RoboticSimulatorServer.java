@@ -1,19 +1,21 @@
+package simulator;
+
 import bluetooth.BluetoothConnectionManagerCaller;
 import bluetooth.BluetoothManager;
-import transfer.ReceivedData;
 import transfer.TransferDataConverter;
 import transfer.TransferDataConverterException;
 import vrep.VRepController;
+import vrep.VRepControllerCaller;
 import vrep.VRepControllerException;
 
-public class RoboticSimulatorServer implements BluetoothConnectionManagerCaller {
+public class RoboticSimulatorServer implements BluetoothConnectionManagerCaller, VRepControllerCaller {
     private final static float DIVISOR_SPEED_REDUCTION = 8;
 
     private VRepController vRepController;
     private BluetoothManager bluetoothManager;
 
     RoboticSimulatorServer() {
-        vRepController = new VRepController();
+        vRepController = new VRepController(this);
         bluetoothManager = new BluetoothManager(this);
     }
 
@@ -30,18 +32,18 @@ public class RoboticSimulatorServer implements BluetoothConnectionManagerCaller 
     @Override
     public void receivedDataViaBluetooth(String strReceivedData) {
         try {
-            ReceivedData receivedData = convertStrToReceivedData(strReceivedData);
+            ReceivedDataBluetooth receivedData = convertStrToReceivedData(strReceivedData);
             moveRoboticArm(receivedData);
         }catch (TransferDataConverterException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private ReceivedData convertStrToReceivedData(String strReceivedData) throws TransferDataConverterException {
+    private ReceivedDataBluetooth convertStrToReceivedData(String strReceivedData) throws TransferDataConverterException {
         return TransferDataConverter.getReceivedData(strReceivedData);
     }
 
-    private void moveRoboticArm(ReceivedData receivedData) {
+    private void moveRoboticArm(ReceivedDataBluetooth receivedData) {
         float speed = reduceSpeed(receivedData.getValue());
         try {
             switch (receivedData.getRoboticArmPart()) {
@@ -66,5 +68,9 @@ public class RoboticSimulatorServer implements BluetoothConnectionManagerCaller 
 
     private float reduceSpeed(float speed) {
         return speed / RoboticSimulatorServer.DIVISOR_SPEED_REDUCTION;
+    }
+
+    public void receivedDataFromVRep(ReceivedDataVRep receivedDataVRep) {
+          // ToDo
     }
 }

@@ -1,6 +1,7 @@
 package vrep;
 
 import coppelia.*;
+import simulator.ReceivedDataVRep;
 
 /*
  * This class should communicate with the vRep and control the vRep. With this class an external class should be able
@@ -9,6 +10,9 @@ import coppelia.*;
 public class VRepController {
     private final static String SIMULATOR_SCENE_OBJECT = "IRB140";
     private final static Float GRAB_SPEED_SCALE_FACTOR = 5f;
+    private final static int MILLISECONDS_UNTIL_NEXT_RECONNECT_TRY = 2000;
+
+    private VRepControllerCaller mCaller;
 
     private remoteApi mVrep;
     private int mClientID;
@@ -16,7 +20,8 @@ public class VRepController {
     private FloatWA mInFloats = new FloatWA(1);
 
 
-    public VRepController() {
+    public VRepController(VRepControllerCaller caller) {
+        mCaller = caller;
         mVrep = new remoteApi();
     }
 
@@ -44,20 +49,13 @@ public class VRepController {
 
     private void reconnectToServer() {
         while (!isConnectedToServer()) {
-            sleep(2000);
+            sleep(MILLISECONDS_UNTIL_NEXT_RECONNECT_TRY);
             System.out.println("Trying to reconnect to V-REP API server...");
             connectToServer();
         }
         System.out.println("Connected to V-REP API server...");
     }
 
-    /**
-     * If this function is called, the speed of grabbing/releasing should be changed.
-     * positive value = grabbing
-     * negative value = releasing
-     *
-     * @param speed - speed grab
-     */
     public void setSpeedGrab(float speed) throws VRepControllerException {
         // Scale speed
         speed = speed * GRAB_SPEED_SCALE_FACTOR;
@@ -70,13 +68,6 @@ public class VRepController {
         checkStatusCode(result, "setSpeedGrab()");
     }
 
-    /**
-     * If this function is called, the speed for the tip should be changed.
-     * positive value = tip up
-     * negative value = tip down
-     *
-     * @param speed - speed tip
-     */
     public void setSpeedTip(float speed) throws VRepControllerException {
         System.out.println("VREP.TIP\t" + speed);
         mInFloats.getArray()[0] = speed;
@@ -87,13 +78,6 @@ public class VRepController {
         checkStatusCode(result, "setSpeedTip()");
     }
 
-    /**
-     * If this function is called, the speed for the body should be changed.
-     * positive value = body up
-     * negative value = body down
-     *
-     * @param speed - speed body
-     */
     public void setSpeedBody(float speed) throws VRepControllerException {
         System.out.println("VREP.BODY\t" + speed);
         mInFloats.getArray()[0] = speed;
@@ -104,13 +88,6 @@ public class VRepController {
         checkStatusCode(result, "setSpeedBody()");
     }
 
-    /**
-     * If this function is called, the speed for the rotation should be changed.
-     * positive value = rotation to the right
-     * negative value = rotation to the left
-     *
-     * @param speed - speed rotation
-     */
     public void setSpeedRotation(float speed) throws VRepControllerException {
         System.out.println("VREP.ROTATION\t" + speed);
         mInFloats.getArray()[0] = speed;
@@ -121,12 +98,13 @@ public class VRepController {
         checkStatusCode(result, "setSpeedRotation()");
     }
 
-    public void checkStatusCode(int statusCode, String statusMessage) throws VRepControllerException {
+    private void checkStatusCode(int statusCode, String statusMessage) throws VRepControllerException {
         if (statusCode != remoteApi.simx_return_ok) {
             if (!isConnectedToServer()) {
                 System.out.println("Connection to V-REP API server lost...");
                 reconnectToServer();
             } else {
+                // ToDo: this throws an error when we are connected to the server or???
                 throw new VRepControllerException(statusMessage + " remote function call failed...");
             }
         }
@@ -138,5 +116,9 @@ public class VRepController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void sendSimulationDataToCaller() {
+        mCaller.receivedDataFromVRep(new ReceivedDataVRep());
     }
 }

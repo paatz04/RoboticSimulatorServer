@@ -1,13 +1,13 @@
 package transfer;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import simulator.ReceivedDataBluetooth;
 import vrep.RoboticArmPart;
 
 public class TransferDataConverter {
 
     @NotNull
-    public static ReceivedData getReceivedData(String receivedString) throws TransferDataConverterException {
+    public static ReceivedDataBluetooth getReceivedData(String receivedString) throws TransferDataConverterException {
         String[] partsReceivedString = receivedString.split("=");
         if (partsReceivedString.length == 2)
             return handleReceivedDataParts(partsReceivedString[0], partsReceivedString[1]);
@@ -16,10 +16,10 @@ public class TransferDataConverter {
     }
 
     @NotNull
-    private static ReceivedData handleReceivedDataParts(String strRoboticArmPart, String strValue) throws TransferDataConverterException {
+    private static ReceivedDataBluetooth handleReceivedDataParts(String strRoboticArmPart, String strValue) throws TransferDataConverterException {
         RoboticArmPart roboticArmPart = convertStrToRoboticArmPart(strRoboticArmPart);
         float value = convertStrToFloat(strValue);
-        return new ReceivedData(roboticArmPart, value);
+        return new ReceivedDataBluetooth(roboticArmPart, value);
     }
 
     private static RoboticArmPart convertStrToRoboticArmPart(String strRoboticArmPart) throws TransferDataConverterException {
