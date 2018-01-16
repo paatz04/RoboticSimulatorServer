@@ -1,6 +1,9 @@
 package vrep;
 
 import coppelia.*;
+import simulator.ReceivedDataVRep;
+import simulator.RoboticSensorPart;
+import transfer.TransferredColors;
 
 /*
  * This class should communicate with the vRep and control the vRep. With this class an external class should be able
@@ -9,6 +12,9 @@ import coppelia.*;
 public class VRepController {
     private final static String SIMULATOR_SCENE_OBJECT = "IRB140";
     private final static Float GRAB_SPEED_SCALE_FACTOR = 5f;
+    private final static int MILLISECONDS_UNTIL_NEXT_RECONNECT_TRY = 2000;
+
+    private VRepControllerCaller mCaller;
 
     private final static String BOX_COLOR_SIGNAL        = "boxColor";
     private final static String BOX_GRAB_SIGNAL         = "grab";
@@ -30,7 +36,8 @@ public class VRepController {
     private int mVrepSignalCounterB = -1;
     private int mVrepSignalCounterMiss = -1;
 
-    public VRepController() {
+    public VRepController(VRepControllerCaller caller) {
+        mCaller = caller;
         mVrep = new remoteApi();
     }
 
@@ -60,7 +67,7 @@ public class VRepController {
 
     private void reconnectToServer() {
         while (!isConnectedToServer()) {
-            sleep(2000);
+            sleep(MILLISECONDS_UNTIL_NEXT_RECONNECT_TRY);
             System.out.println("Trying to reconnect to V-REP API server...");
             connectToServer();
         }
@@ -99,13 +106,6 @@ public class VRepController {
         checkCounterSignals();
     }
 
-    /**
-     * If this function is called, the speed for the tip should be changed.
-     * positive value = tip up
-     * negative value = tip down
-     *
-     * @param speed - speed tip
-     */
     public void setSpeedTip(float speed) throws VRepControllerException {
         System.out.println("VREP.TIP\t" + speed);
         mInFloats.getArray()[0] = speed;
@@ -117,13 +117,6 @@ public class VRepController {
         checkCounterSignals();
     }
 
-    /**
-     * If this function is called, the speed for the body should be changed.
-     * positive value = body up
-     * negative value = body down
-     *
-     * @param speed - speed body
-     */
     public void setSpeedBody(float speed) throws VRepControllerException {
         System.out.println("VREP.BODY\t" + speed);
         mInFloats.getArray()[0] = speed;
@@ -135,13 +128,6 @@ public class VRepController {
         checkCounterSignals();
     }
 
-    /**
-     * If this function is called, the speed for the rotation should be changed.
-     * positive value = rotation to the right
-     * negative value = rotation to the left
-     *
-     * @param speed - speed rotation
-     */
     public void setSpeedRotation(float speed) throws VRepControllerException {
         System.out.println("VREP.ROTATION\t" + speed);
         mInFloats.getArray()[0] = speed;
@@ -153,7 +139,7 @@ public class VRepController {
         checkCounterSignals();
     }
 
-    public void checkStatusCode(int statusCode, String statusMessage) throws VRepControllerException {
+    private void checkStatusCode(int statusCode, String statusMessage) throws VRepControllerException {
         if (statusCode != remoteApi.simx_return_ok) {
             if (!isConnectedToServer()) {
                 System.out.println("Connection to V-REP API server lost...");
@@ -175,21 +161,26 @@ public class VRepController {
         if (serverSignalType == BOX_COLOR_SIGNAL) {
             mVrepSignalBoxColor = mVrepSignal.getValue();
             System.out.println("VREP.BOX_COLOR\t" + mVrepSignalBoxColor);
+            mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.COLOR_GRAB, mVrepSignalBoxColor));
         } else if (serverSignalType == BOX_GRAB_SIGNAL) {
             mVrepSignalGrab = mVrepSignal.getValue();
             System.out.println("VREP.BOX_GRAB\t" + mVrepSignalGrab);
         } else if (serverSignalType == COUNTER_RED_SIGNAL && mVrepSignalCounterR != mVrepSignal.getValue()) {
             mVrepSignalCounterR = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_RED\t" + mVrepSignalCounterR);
+            mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_RED, mVrepSignalCounterR));
         } else if (serverSignalType == COUNTER_GREEN_SIGNAL && mVrepSignalCounterG != mVrepSignal.getValue()) {
             mVrepSignalCounterG = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_GREEN\t" + mVrepSignalCounterG);
+            mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_GREEN, mVrepSignalCounterG));
         } else if (serverSignalType == COUNTER_BLUE_SIGNAL && mVrepSignalCounterB != mVrepSignal.getValue()) {
             mVrepSignalCounterB = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_BLUE\t" + mVrepSignalCounterB);
+            mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_BLUE, mVrepSignalCounterB));
         } else if (serverSignalType == COUNTER_MISS_SIGNAL && mVrepSignalCounterMiss != mVrepSignal.getValue()) {
             mVrepSignalCounterMiss = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_MISS\t" + mVrepSignalCounterMiss);
+            mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_MISSED, mVrepSignalCounterMiss));
         }
     }
 
@@ -210,5 +201,11 @@ public class VRepController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void sendSimulationDataToCaller() {
+        // ToDo
+        mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.COLOR_GRAB, TransferredColors.RED));
+        mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_BLUE, 3));
     }
 }

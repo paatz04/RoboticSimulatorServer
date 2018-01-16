@@ -1,8 +1,10 @@
 package vrep;
 
-public class VRepControllerClass {
-    public static void main(String[] args) {
-        VRepController vrep = new VRepController();
+import simulator.ReceivedDataVRep;
+
+public class VRepControllerClass implements VRepControllerCaller {
+    public VRepControllerClass () {
+        VRepController vrep = new VRepController(this);
         try {
             vrep.start();
             sleep(1000);
@@ -13,10 +15,9 @@ public class VRepControllerClass {
         }catch(VRepControllerException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
-    private static void moveGrab(VRepController vrep) throws VRepControllerException {
+    private void moveGrab(VRepController vrep) throws VRepControllerException {
         // grab
         vrep.setSpeedGrab(2);
         sleep(1000);
@@ -28,7 +29,7 @@ public class VRepControllerClass {
         vrep.setSpeedGrab(0);
     }
 
-    private static void moveTip(VRepController vrep) throws VRepControllerException {
+    private void moveTip(VRepController vrep) throws VRepControllerException {
         // move tip down
         vrep.setSpeedTip(-0.5f);
         sleep(500);
@@ -45,7 +46,7 @@ public class VRepControllerClass {
         vrep.setSpeedTip(0);
     }
 
-    private static void moveBody(VRepController vrep) throws VRepControllerException {
+    private void moveBody(VRepController vrep) throws VRepControllerException {
         // move body down
         vrep.setSpeedBody(0.5f);
         sleep(500);
@@ -62,7 +63,7 @@ public class VRepControllerClass {
         vrep.setSpeedBody(0);
     }
 
-    private static void moveRotate(VRepController vrep) throws VRepControllerException {
+    private void moveRotate(VRepController vrep) throws VRepControllerException {
         // rotate right
         vrep.setSpeedRotation(1);
         sleep(1000);
@@ -79,11 +80,19 @@ public class VRepControllerClass {
         vrep.setSpeedRotation(0);
     }
 
-    private static void sleep(int milliseconds) {
+    private void sleep(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void receivedDataFromVRep(ReceivedDataVRep receivedDataVRep) {
+    }
+
+    public static void main(String[] args) {
+        new VRepControllerClass();
     }
 }

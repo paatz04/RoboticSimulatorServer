@@ -1,4 +1,4 @@
-import vrep.VRepController;
+import simulator.RoboticSimulatorServer;
 import vrep.VRepControllerException;
 
 public class Main {
