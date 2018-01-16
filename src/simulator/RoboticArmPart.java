@@ -1,4 +1,4 @@
-package vrep;
+package simulator;
 
 public enum RoboticArmPart {
     GRAB,

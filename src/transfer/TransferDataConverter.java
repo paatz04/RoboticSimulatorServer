@@ -2,7 +2,7 @@ package transfer;
 
 import org.jetbrains.annotations.NotNull;
 import simulator.ReceivedDataBluetooth;
-import vrep.RoboticArmPart;
+import simulator.RoboticArmPart;
 
 public class TransferDataConverter {
 

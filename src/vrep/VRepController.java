@@ -2,6 +2,8 @@ package vrep;
 
 import coppelia.*;
 import simulator.ReceivedDataVRep;
+import simulator.RoboticSensorPart;
+import transfer.TransferredColors;
 
 /*
  * This class should communicate with the vRep and control the vRep. With this class an external class should be able
@@ -119,6 +121,8 @@ public class VRepController {
     }
 
     private void sendSimulationDataToCaller() {
-        mCaller.receivedDataFromVRep(new ReceivedDataVRep());
+        // ToDo
+        mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.COLOR_GRAB, TransferredColors.RED));
+        mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_BLUE, 3));
     }
 }

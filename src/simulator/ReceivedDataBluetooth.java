@@ -1,7 +1,5 @@
 package simulator;
 
-import vrep.RoboticArmPart;
-
 public class ReceivedDataBluetooth {
     private RoboticArmPart mRoboticArmPart;
     private float mValue;
