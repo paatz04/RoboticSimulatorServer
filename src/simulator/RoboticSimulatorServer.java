@@ -14,7 +14,7 @@ public class RoboticSimulatorServer implements BluetoothConnectionManagerCaller,
     private VRepController vRepController;
     private BluetoothManager bluetoothManager;
 
-    RoboticSimulatorServer() {
+    public RoboticSimulatorServer() {
         vRepController = new VRepController(this);
         bluetoothManager = new BluetoothManager(this);
     }

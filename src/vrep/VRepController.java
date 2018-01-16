@@ -151,33 +151,33 @@ public class VRepController {
         }
     }
 
-    public void handleServerSignal(String serverSignalType) {
+    private void handleServerSignal(String serverSignalType) {
 
         mVrep.simxGetIntegerSignal(mClientID,serverSignalType,mVrepSignal,remoteApi.simx_opmode_buffer);
 
         if (mVrepSignal.getValue() == -1)
             return;
 
-        if (serverSignalType == BOX_COLOR_SIGNAL) {
+        if (serverSignalType.equals(BOX_COLOR_SIGNAL)) {
             mVrepSignalBoxColor = mVrepSignal.getValue();
             System.out.println("VREP.BOX_COLOR\t" + mVrepSignalBoxColor);
             mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.COLOR_GRAB, mVrepSignalBoxColor));
-        } else if (serverSignalType == BOX_GRAB_SIGNAL) {
+        } else if (serverSignalType.equals(BOX_GRAB_SIGNAL)) {
             mVrepSignalGrab = mVrepSignal.getValue();
             System.out.println("VREP.BOX_GRAB\t" + mVrepSignalGrab);
-        } else if (serverSignalType == COUNTER_RED_SIGNAL && mVrepSignalCounterR != mVrepSignal.getValue()) {
+        } else if (serverSignalType.equals(COUNTER_RED_SIGNAL) && mVrepSignalCounterR != mVrepSignal.getValue()) {
             mVrepSignalCounterR = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_RED\t" + mVrepSignalCounterR);
             mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_RED, mVrepSignalCounterR));
-        } else if (serverSignalType == COUNTER_GREEN_SIGNAL && mVrepSignalCounterG != mVrepSignal.getValue()) {
+        } else if (serverSignalType.equals(COUNTER_GREEN_SIGNAL) && mVrepSignalCounterG != mVrepSignal.getValue()) {
             mVrepSignalCounterG = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_GREEN\t" + mVrepSignalCounterG);
             mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_GREEN, mVrepSignalCounterG));
-        } else if (serverSignalType == COUNTER_BLUE_SIGNAL && mVrepSignalCounterB != mVrepSignal.getValue()) {
+        } else if (serverSignalType.equals(COUNTER_BLUE_SIGNAL) && mVrepSignalCounterB != mVrepSignal.getValue()) {
             mVrepSignalCounterB = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_BLUE\t" + mVrepSignalCounterB);
             mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_BLUE, mVrepSignalCounterB));
-        } else if (serverSignalType == COUNTER_MISS_SIGNAL && mVrepSignalCounterMiss != mVrepSignal.getValue()) {
+        } else if (serverSignalType.equals(COUNTER_MISS_SIGNAL) && mVrepSignalCounterMiss != mVrepSignal.getValue()) {
             mVrepSignalCounterMiss = mVrepSignal.getValue();
             System.out.println("VREP.COUNTER_MISS\t" + mVrepSignalCounterMiss);
             mCaller.receivedDataFromVRep(new ReceivedDataVRep(RoboticSensorPart.SCORE_MISSED, mVrepSignalCounterMiss));
