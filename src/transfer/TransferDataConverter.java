@@ -3,6 +3,9 @@ package transfer;
 import simulator.received.data.ReceivedConnectionData;
 import simulator.received.data.ReceivedSimulatorData;
 import simulator.received.data.RoboticArmPart;
+import simulator.received.data.RoboticSensorPart;
+
+import static simulator.received.data.RoboticSensorPart.COLOR_GRAB;
 
 public class TransferDataConverter {
 
@@ -44,8 +47,23 @@ public class TransferDataConverter {
     }
 
     public static String getMessageToSend(ReceivedSimulatorData receivedDataVRep) throws TransferDataConverterException {
-        // ToDo
-        return null;
+        return getStringOfType(receivedDataVRep.getRoboticSensorPart()) + "=" + receivedDataVRep.getValue();
     }
 
+    private static String getStringOfType(RoboticSensorPart roboticSensorPart) throws TransferDataConverterException {
+        switch (roboticSensorPart) {
+            case COLOR_GRAB:
+                return "COLOR_GRAB";
+            case SCORE_RED:
+                return "SCORE_RED";
+            case SCORE_BLUE:
+                return "SCORE_BLUE";
+            case SCORE_GREEN:
+                return "SCORE_GREEN";
+            case SCORE_MISSED:
+                return "SCORE_MISSED";
+            default:
+                throw new TransferDataConverterException("RoboticSensorPart not correct");
+        }
+    }
 }
