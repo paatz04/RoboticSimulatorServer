@@ -55,7 +55,7 @@ public class ConnectionThread extends Thread implements DataInputStreamListenerC
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("ConnectionThread finished");
         closeAllConnections();
         stopConnection();
     }

@@ -6,15 +6,12 @@ import bluetooth.BluetoothManager;
 import bluetooth.BluetoothManagerException;
 import simulator.received.ReceivedConnectionDataHandler;
 import simulator.received.ReceivedSimulatorDataHandler;
-import simulator.received.data.ReceivedConnectionData;
 import simulator.received.data.ReceivedSimulatorData;
-import sun.reflect.CallerSensitive;
-import transfer.TransferDataConverter;
-import transfer.TransferDataConverterException;
 import vrep.VRepController;
 import vrep.VRepControllerCaller;
 import vrep.VRepControllerException;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerCaller {
@@ -73,11 +70,13 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
             } catch (BluetoothManagerException e) {
                 System.out.println(e.getMessage());
             }
+            System.out.println("Server: Connection Closed");
         }
         if (mConnection != null)
             mConnection.stopConnection();
         mBluetoothManager.stopBluetoothManager();
         mSimulator.stopVRepController();
+        System.out.println("Server: finished");
     }
 
     private void handleConnection() {
@@ -97,9 +96,9 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
     }
 
     private void handleReceivedConnectionData() {
-        String receivedData = popReceivedConnectionData();
-        if (receivedData != null)
-            mReceivedConnectionDataHandler.handle(receivedData);
+        try {
+            mReceivedConnectionDataHandler.handle(popReceivedConnectionData());
+        } catch (EmptyStackException ignored) { }
     }
 
     private synchronized String popReceivedConnectionData() {
@@ -107,9 +106,9 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
     }
 
     private void handleReceivedSimulatorData() {
-        ReceivedSimulatorData receivedData = popReceivedSimulatorData();
-        if (receivedData != null)
-            mReceivedSimulatorDataHandler.handle(receivedData);
+        try {
+            mReceivedSimulatorDataHandler.handle(popReceivedSimulatorData());
+        } catch (EmptyStackException ignored) {}
     }
 
     private synchronized ReceivedSimulatorData popReceivedSimulatorData() {

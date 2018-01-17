@@ -7,7 +7,7 @@ import vrep.VRepController;
 
 
 public class ReceivedConnectionDataHandler {
-    private final static float DIVISOR_SPEED_REDUCTION = 3;
+    private final static float DIVISOR_SPEED_REDUCTION = 10;
 
     private VRepController mSimulator;
 

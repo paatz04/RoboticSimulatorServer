@@ -3,7 +3,8 @@ package vrep;
 import simulator.received.data.ReceivedSimulatorData;
 
 public class VRepControllerClass implements VRepControllerCaller {
-    public VRepControllerClass () {
+
+    private VRepControllerClass () {
         VRepController vrep = new VRepController(this);
         try {
             vrep.start();
@@ -17,7 +18,7 @@ public class VRepControllerClass implements VRepControllerCaller {
         }
     }
 
-    private void moveGrab(VRepController vrep) throws VRepControllerException {
+    private void moveGrab(VRepController vrep) {
         // grab
         vrep.setSpeedGrab(2);
         sleep(1000);
@@ -29,7 +30,7 @@ public class VRepControllerClass implements VRepControllerCaller {
         vrep.setSpeedGrab(0);
     }
 
-    private void moveTip(VRepController vrep) throws VRepControllerException {
+    private void moveTip(VRepController vrep) {
         // move tip down
         vrep.setSpeedTip(-0.5f);
         sleep(500);
@@ -46,7 +47,7 @@ public class VRepControllerClass implements VRepControllerCaller {
         vrep.setSpeedTip(0);
     }
 
-    private void moveBody(VRepController vrep) throws VRepControllerException {
+    private void moveBody(VRepController vrep) {
         // move body down
         vrep.setSpeedBody(0.5f);
         sleep(500);
@@ -63,7 +64,7 @@ public class VRepControllerClass implements VRepControllerCaller {
         vrep.setSpeedBody(0);
     }
 
-    private void moveRotate(VRepController vrep) throws VRepControllerException {
+    private void moveRotate(VRepController vrep) {
         // rotate right
         vrep.setSpeedRotation(1);
         sleep(1000);
@@ -89,7 +90,8 @@ public class VRepControllerClass implements VRepControllerCaller {
     }
 
     @Override
-    public void receivedDataFromVRep(ReceivedSimulatorData receivedDataVRep) {
+    public void addReceivedSimulatorData(ReceivedSimulatorData receivedDataVRep) {
+
     }
 
     public static void main(String[] args) {

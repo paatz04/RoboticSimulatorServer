@@ -21,6 +21,7 @@ public class BluetoothManager {
             setLocalBluetoothDeviceDiscoverable();
             setUpServerToListenForConnections();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new BluetoothManagerException("Couldn't set up the Bluetooth-server.");
         }
     }
