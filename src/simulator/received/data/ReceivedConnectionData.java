@@ -1,10 +1,10 @@
-package simulator;
+package simulator.received.data;
 
-public class ReceivedDataBluetooth {
+public class ReceivedConnectionData {
     private RoboticArmPart mRoboticArmPart;
     private float mValue;
 
-    public ReceivedDataBluetooth(RoboticArmPart roboticArmPart, float value) {
+    public ReceivedConnectionData(RoboticArmPart roboticArmPart, float value) {
         mRoboticArmPart = roboticArmPart;
         mValue = value;
     }

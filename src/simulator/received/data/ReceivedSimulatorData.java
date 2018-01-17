@@ -1,10 +1,10 @@
-package simulator;
+package simulator.received.data;
 
-public class ReceivedDataVRep {
+public class ReceivedSimulatorData {
     private RoboticSensorPart mSensor;
     private int mValue;
 
-    public ReceivedDataVRep(RoboticSensorPart sensor, int value) {
+    public ReceivedSimulatorData(RoboticSensorPart sensor, int value) {
         mSensor = sensor;
         mValue = value;
     }

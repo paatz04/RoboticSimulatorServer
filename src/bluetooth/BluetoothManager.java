@@ -1,8 +1,5 @@
 package bluetooth;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
-
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DiscoveryAgent;
 import javax.bluetooth.LocalDevice;
@@ -11,47 +8,20 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class BluetoothManager extends Thread{
+public class BluetoothManager {
     private static final int UUID_ADDRESS = 80087355; // "04c6093b-0000-1000-8000-00805f9b34fb"
 
-    private BluetoothConnectionManagerCaller mCaller;
     private StreamConnectionNotifier mNotifier;
-    private boolean mStopped = false;
-    // ToDo we don't need a list, because we only support one device
-    private ArrayList<BluetoothConnectionManager> mBluetoothConnectionManagerList;
 
-    public BluetoothManager(BluetoothConnectionManagerCaller caller) {
-        mCaller = caller;
-        mBluetoothConnectionManagerList = new ArrayList<>();
-    }
+    public BluetoothManager() {}
 
-    public synchronized void stopBluetoothManager() {
-        mStopped = true;
-    }
-
-    @Contract(pure = true)
-    private synchronized boolean isBluetoothManagerStopped() {
-        return mStopped;
-    }
-
-    public void run() {
-        setUpServer();
-        if (isServerSetUp()) {
-            System.out.println("BluetoothManager started");
-            handleNewConnections();
-        }
-        System.out.println("BluetoothManager finished");
-    }
-
-    private void setUpServer() {
+    public void startBluetoothManager() throws BluetoothManagerException {
         try {
             setLocalBluetoothDeviceDiscoverable();
             setUpServerToListenForConnections();
         } catch (IOException e) {
-            System.out.println("Could not set up the server");
-            mNotifier = null;
+            throw new BluetoothManagerException("Couldn't set up the Bluetooth-server.");
         }
     }
 
@@ -66,54 +36,20 @@ public class BluetoothManager extends Thread{
         mNotifier = (StreamConnectionNotifier) Connector.open(url);
     }
 
-    @Contract(pure = true)
-    private boolean isServerSetUp() {
-        return mNotifier != null;
-    }
-
-    private void handleNewConnections() {
-        while(!isBluetoothManagerStopped()) {
-            StreamConnection connection = waitForConnection();
-            if (connection != null)
-                startBluetoothConnectionManager(connection);
-        }
-        stopAllBluetoothConnections();
-        waitUntilAllBluetoothConnectionsAreStopped();
-    }
-
-    @Nullable
-    private StreamConnection waitForConnection(){
+    public void stopBluetoothManager() {
         try {
-            return mNotifier.acceptAndOpen();
+            mNotifier.close();
         } catch (IOException e) {
-            e.printStackTrace();
-            // ToDo: probably we have to stop the Server
+            System.out.println("Couldn't close the notifier.");
         }
-        return null;
     }
 
-    private void startBluetoothConnectionManager(StreamConnection connection) {
-        BluetoothConnectionManager bluetoothConnectionManager = new BluetoothConnectionManager(connection, mCaller);
-        bluetoothConnectionManager.start();
-        addBluetoothConnection(bluetoothConnectionManager);
-    }
-
-    private synchronized void addBluetoothConnection(BluetoothConnectionManager bluetoothConnectionManager) {
-        mBluetoothConnectionManagerList.add(bluetoothConnectionManager);
-    }
-
-    private synchronized void stopAllBluetoothConnections() {
-        for (BluetoothConnectionManager bluetoothConnectionManager : mBluetoothConnectionManagerList)
-            bluetoothConnectionManager.stopBluetoothConnectionManager();
-    }
-
-    private synchronized void waitUntilAllBluetoothConnectionsAreStopped() {
-        for (BluetoothConnectionManager bluetoothConnectionManager : mBluetoothConnectionManagerList) {
-            try {
-                bluetoothConnectionManager.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    public ConnectionThread getBluetoothConnection() throws BluetoothManagerException {
+        try {
+            StreamConnection connection = mNotifier.acceptAndOpen();
+            return new ConnectionThread(connection);
+        } catch(IOException e) {
+            throw new BluetoothManagerException("Couldn't open a new Connection.");
         }
     }
 }

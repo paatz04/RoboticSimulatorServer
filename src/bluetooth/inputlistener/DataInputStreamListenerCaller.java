@@ -1,6 +1,6 @@
 package bluetooth.inputlistener;
 
 public interface DataInputStreamListenerCaller {
-    void receivedStringFromInputStream(String received);
-    void dataInputStreamClosed();
+    void addReceivedData(String received);
+    void dataInputStreamStopped();
 }

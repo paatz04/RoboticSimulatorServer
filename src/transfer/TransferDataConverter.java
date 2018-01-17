@@ -1,25 +1,23 @@
 package transfer;
 
-import org.jetbrains.annotations.NotNull;
-import simulator.ReceivedDataBluetooth;
-import simulator.RoboticArmPart;
+import simulator.received.data.ReceivedConnectionData;
+import simulator.received.data.ReceivedSimulatorData;
+import simulator.received.data.RoboticArmPart;
 
 public class TransferDataConverter {
 
-    @NotNull
-    public static ReceivedDataBluetooth getReceivedData(String receivedString) throws TransferDataConverterException {
+    public static ReceivedConnectionData getReceivedBluetoothData(String receivedString) throws TransferDataConverterException {
         String[] partsReceivedString = receivedString.split("=");
         if (partsReceivedString.length == 2)
-            return handleReceivedDataParts(partsReceivedString[0], partsReceivedString[1]);
+            return handleReceivedBluetoothDataParts(partsReceivedString[0], partsReceivedString[1]);
         else
             throw new TransferDataConverterException(receivedString + " isn't in correct Format");
     }
 
-    @NotNull
-    private static ReceivedDataBluetooth handleReceivedDataParts(String strRoboticArmPart, String strValue) throws TransferDataConverterException {
+    private static ReceivedConnectionData handleReceivedBluetoothDataParts(String strRoboticArmPart, String strValue) throws TransferDataConverterException {
         RoboticArmPart roboticArmPart = convertStrToRoboticArmPart(strRoboticArmPart);
         float value = convertStrToFloat(strValue);
-        return new ReceivedDataBluetooth(roboticArmPart, value);
+        return new ReceivedConnectionData(roboticArmPart, value);
     }
 
     private static RoboticArmPart convertStrToRoboticArmPart(String strRoboticArmPart) throws TransferDataConverterException {
@@ -43,6 +41,11 @@ public class TransferDataConverter {
         }catch(NumberFormatException e){
             throw new TransferDataConverterException("Second part (Value) of received Data isn't Float: " + strValue);
         }
+    }
+
+    public static String getMessageToSend(ReceivedSimulatorData receivedDataVRep) throws TransferDataConverterException {
+        // ToDo
+        return null;
     }
 
 }

@@ -1,4 +1,4 @@
-package simulator;
+package simulator.received.data;
 
 public enum RoboticArmPart {
     GRAB,

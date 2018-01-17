@@ -21,12 +21,12 @@ public class DataInputStreamListener extends Thread {
 
     @Override
     public void run() {
-        System.out.println("DataInputStreamListener started");
         while (!mStopped) {
             String receivedString = waitForInputStreamData();
             if (receivedString != null)
-                mCaller.receivedStringFromInputStream(receivedString);
+                mCaller.addReceivedData(receivedString);
         }
+        mCaller.dataInputStreamStopped();
     }
 
     @Nullable
@@ -36,7 +36,6 @@ public class DataInputStreamListener extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
             stopDataInputStreamListener();
-            mCaller.dataInputStreamClosed();
         }
         return null;
     }

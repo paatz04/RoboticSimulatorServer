@@ -1,76 +1,138 @@
 package simulator;
 
-import bluetooth.BluetoothConnectionManagerCaller;
+import bluetooth.ConnectionThread;
+import bluetooth.ConnectionCaller;
 import bluetooth.BluetoothManager;
+import bluetooth.BluetoothManagerException;
+import simulator.received.ReceivedConnectionDataHandler;
+import simulator.received.ReceivedSimulatorDataHandler;
+import simulator.received.data.ReceivedConnectionData;
+import simulator.received.data.ReceivedSimulatorData;
+import sun.reflect.CallerSensitive;
 import transfer.TransferDataConverter;
 import transfer.TransferDataConverterException;
 import vrep.VRepController;
 import vrep.VRepControllerCaller;
 import vrep.VRepControllerException;
 
-public class RoboticSimulatorServer implements BluetoothConnectionManagerCaller, VRepControllerCaller {
-    private final static float DIVISOR_SPEED_REDUCTION = 8;
+import java.util.Stack;
 
-    private VRepController vRepController;
-    private BluetoothManager bluetoothManager;
+public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerCaller {
+    private VRepController mSimulator;
+    private BluetoothManager mBluetoothManager;
+    private ConnectionThread mConnection;
+
+    private boolean mStopped = false;
+
+    private Stack<String> mReceivedConnectionData = new Stack<>();
+    private Stack<ReceivedSimulatorData> mReceivedSimulatorData = new Stack<>();
+
+    private ReceivedConnectionDataHandler mReceivedConnectionDataHandler;
+    private ReceivedSimulatorDataHandler mReceivedSimulatorDataHandler;
 
     public RoboticSimulatorServer() {
-        vRepController = new VRepController(this);
-        bluetoothManager = new BluetoothManager(this);
+        mSimulator = new VRepController(this);
+        mBluetoothManager = new BluetoothManager();
     }
 
-    public void startRoboticSimulatorServer() throws VRepControllerException {
-        vRepController.start();
-        bluetoothManager.start();
+    public void startRoboticSimulatorServer() throws RoboticSimulatorServerException {
+        startSimulatorThread();
+        startBluetoothManager();
+        run();
+        stopRoboticSimulatorServer();
     }
 
-    public void stopRoboticSimulatorServer() {
-        bluetoothManager.stopBluetoothManager();
-        vRepController.stopVRepController();
-    }
-
-    @Override
-    public void receivedDataViaBluetooth(String strReceivedData) {
+    private void startSimulatorThread() throws RoboticSimulatorServerException {
         try {
-            ReceivedDataBluetooth receivedData = convertStrToReceivedData(strReceivedData);
-            moveRoboticArm(receivedData);
-        }catch (TransferDataConverterException e) {
-            System.out.println(e.getMessage());
+            mSimulator.start();
+        } catch (VRepControllerException e) {
+            throw new RoboticSimulatorServerException("Couldn't start VRepController");
         }
     }
 
-    private ReceivedDataBluetooth convertStrToReceivedData(String strReceivedData) throws TransferDataConverterException {
-        return TransferDataConverter.getReceivedData(strReceivedData);
+    private void startBluetoothManager() throws RoboticSimulatorServerException {
+        try {
+            mBluetoothManager.startBluetoothManager();
+        } catch (BluetoothManagerException e) {
+            throw new RoboticSimulatorServerException("Couldn't start BluetoothManager.");
+        }
     }
 
-    private void moveRoboticArm(ReceivedDataBluetooth receivedData) {
-        float speed = reduceSpeed(receivedData.getValue());
-        try {
-            switch (receivedData.getRoboticArmPart()) {
-                case GRAB:
-                    vRepController.setSpeedGrab(speed);
-                    break;
-                case TIP:
-                    vRepController.setSpeedTip(speed);
-                    break;
-                case BODY:
-                    vRepController.setSpeedBody(speed);
-                    break;
-                case ROTATION:
-                    vRepController.setSpeedRotation(speed);
-                    break;
+    public synchronized void stopRoboticSimulatorServer() {
+        mStopped = true;
+        notify();
+    }
+
+    private void run() {
+        while(!mStopped) {
+            try {
+                mConnection = mBluetoothManager.getBluetoothConnection();
+                handleConnection();
+                mConnection.stopConnection();
+                mConnection = null;
+            } catch (BluetoothManagerException e) {
+                System.out.println(e.getMessage());
             }
-        }catch (VRepControllerException e) {
-            System.out.println(e.getMessage());
-            stopRoboticSimulatorServer();
+        }
+        if (mConnection != null)
+            mConnection.stopConnection();
+        mBluetoothManager.stopBluetoothManager();
+        mSimulator.stopVRepController();
+    }
+
+    private void handleConnection() {
+        mConnection.startConnectionThread(this);
+        initReceivedDataHandler();
+        while (!mStopped && !mConnection.isConnectionStopped()) {
+            handleReceivedConnectionData();
+            handleReceivedSimulatorData();
+            if (!mStopped)
+                waitForData();
         }
     }
 
-    private float reduceSpeed(float speed) {
-        return speed / RoboticSimulatorServer.DIVISOR_SPEED_REDUCTION;
+    private void initReceivedDataHandler() {
+        mReceivedConnectionDataHandler = new ReceivedConnectionDataHandler(mSimulator);
+        mReceivedSimulatorDataHandler = new ReceivedSimulatorDataHandler(mConnection);
     }
 
-    public void receivedDataFromVRep(ReceivedDataVRep receivedDataVRep) {
-          // ToDo
+    private void handleReceivedConnectionData() {
+        String receivedData = popReceivedConnectionData();
+        if (receivedData != null)
+            mReceivedConnectionDataHandler.handle(receivedData);
+    }
+
+    private synchronized String popReceivedConnectionData() {
+        return mReceivedConnectionData.pop();
+    }
+
+    private void handleReceivedSimulatorData() {
+        ReceivedSimulatorData receivedData = popReceivedSimulatorData();
+        if (receivedData != null)
+            mReceivedSimulatorDataHandler.handle(receivedData);
+    }
+
+    private synchronized ReceivedSimulatorData popReceivedSimulatorData() {
+        return mReceivedSimulatorData.pop();
+    }
+
+    private synchronized void waitForData() {
+        if (mReceivedConnectionData.size() + mReceivedSimulatorData.size() > 0) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public synchronized void addReceivedConnectionData(String receivedData) {
+        mReceivedConnectionData.push(receivedData);
+        notify();
+    }
+
+    public synchronized void addReceivedSimulatorData(ReceivedSimulatorData receivedData) {
+        mReceivedSimulatorData.push(receivedData);
+        notify();
     }
 }

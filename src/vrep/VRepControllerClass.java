@@ -1,6 +1,6 @@
 package vrep;
 
-import simulator.ReceivedDataVRep;
+import simulator.received.data.ReceivedSimulatorData;
 
 public class VRepControllerClass implements VRepControllerCaller {
     public VRepControllerClass () {
@@ -89,7 +89,7 @@ public class VRepControllerClass implements VRepControllerCaller {
     }
 
     @Override
-    public void receivedDataFromVRep(ReceivedDataVRep receivedDataVRep) {
+    public void receivedDataFromVRep(ReceivedSimulatorData receivedDataVRep) {
     }
 
     public static void main(String[] args) {

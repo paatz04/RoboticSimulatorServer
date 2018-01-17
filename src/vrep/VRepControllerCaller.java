@@ -1,7 +1,7 @@
 package vrep;
 
-import simulator.ReceivedDataVRep;
+import simulator.received.data.ReceivedSimulatorData;
 
 public interface VRepControllerCaller {
-    void receivedDataFromVRep(ReceivedDataVRep receivedDataVRep);
+    void receivedDataFromVRep(ReceivedSimulatorData receivedDataVRep);
 }

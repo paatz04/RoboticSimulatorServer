@@ -1,4 +1,4 @@
-package simulator;
+package simulator.received.data;
 
 public enum RoboticSensorPart {
     COLOR_GRAB,
