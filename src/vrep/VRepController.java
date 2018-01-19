@@ -12,10 +12,13 @@ public class VRepController {
 
     private final static String BOX_COLOR_SIGNAL        = "boxColor";
     private final static String BOX_GRAB_SIGNAL         = "grab";
+    private final static String BOX_DROP_SIGNAL         = "drop";
     private final static String COUNTER_RED_SIGNAL      = "countR";
     private final static String COUNTER_GREEN_SIGNAL    = "countG";
     private final static String COUNTER_BLUE_SIGNAL     = "countB";
     private final static String COUNTER_MISS_SIGNAL     = "countMiss";
+
+    private final static int BOX_DROP_SIGNAL_VALUE = 0;
 
     private VRepControllerCaller mCaller;
 
@@ -26,6 +29,7 @@ public class VRepController {
     private IntW mVrepSignal = new IntW(-1);
 
     private int mVrepSignalGrab = -1;
+    private int mVrepSignalDrop = -1;
     private int mVrepSignalCounterRed = -1;
     private int mVrepSignalCounterGreen = -1;
     private int mVrepSignalCounterBlue = -1;
@@ -59,7 +63,7 @@ public class VRepController {
         return mVrep.simxGetConnectionId(mClientID) != -1;
     }
 
-    private void reconnectToServer() {
+    private void reconnectToServer()    {
         while (!isConnectedToServer()) {
             sleep(MILLISECONDS_UNTIL_NEXT_RECONNECT_TRY);
             System.out.println("Trying to reconnect to V-REP API server...");
@@ -71,6 +75,7 @@ public class VRepController {
     private void openServerCommunication() {
         mVrep.simxGetIntegerSignal(mClientID, BOX_COLOR_SIGNAL     ,mVrepSignal,remoteApi.simx_opmode_streaming);
         mVrep.simxGetIntegerSignal(mClientID, BOX_GRAB_SIGNAL      ,mVrepSignal,remoteApi.simx_opmode_streaming);
+        mVrep.simxGetIntegerSignal(mClientID, BOX_DROP_SIGNAL      ,mVrepSignal,remoteApi.simx_opmode_streaming);
         mVrep.simxGetIntegerSignal(mClientID, COUNTER_RED_SIGNAL   ,mVrepSignal,remoteApi.simx_opmode_streaming);
         mVrep.simxGetIntegerSignal(mClientID, COUNTER_GREEN_SIGNAL ,mVrepSignal,remoteApi.simx_opmode_streaming);
         mVrep.simxGetIntegerSignal(mClientID, COUNTER_BLUE_SIGNAL  ,mVrepSignal,remoteApi.simx_opmode_streaming);
@@ -87,9 +92,13 @@ public class VRepController {
                                                 null,null,null,null,null,
                                                 null, remoteApi.simx_opmode_blocking);
         checkStatusCode(result);
-        handleServerSignal(BOX_GRAB_SIGNAL);
-        if (boxIsGrabbed())
-            handleServerSignal(BOX_COLOR_SIGNAL);
+        if (grabbing(speed)) {
+            handleServerSignal(BOX_GRAB_SIGNAL);
+            if (boxIsGrabbed())
+                handleServerSignal(BOX_COLOR_SIGNAL);
+        } else {
+            handleServerSignal(BOX_DROP_SIGNAL);
+        }
         checkCounterSignals();
     }
 
@@ -157,6 +166,9 @@ public class VRepController {
             case BOX_GRAB_SIGNAL:
                 handleServerBoxGrabSignal(mVrepSignal.getValue());
                 break;
+            case BOX_DROP_SIGNAL:
+                handleServerBoxDropSignal();
+                break;
             case COUNTER_RED_SIGNAL:
                 handleServerRedSignal(mVrepSignal.getValue());
                 break;
@@ -178,8 +190,17 @@ public class VRepController {
     }
 
     private void handleServerBoxGrabSignal(int vrepSignalGrab) {
-        mVrepSignalGrab = vrepSignalGrab;
+        if (vrepSignalGrab == 1)
+            mVrepSignalGrab = vrepSignalGrab;
         System.out.println("VREP.BOX_GRAB\t" + vrepSignalGrab);
+    }
+
+    private void handleServerBoxDropSignal() {
+        if (boxIsGrabbed()) {
+            releaseBox();
+            System.out.println("VREP.BOX_DROP");
+            mCaller.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.COLOR_GRAB, BOX_DROP_SIGNAL_VALUE));
+        }
     }
 
     private void handleServerRedSignal(int numberElements) {
@@ -214,9 +235,16 @@ public class VRepController {
         }
     }
 
-    @Contract(pure = true)
     private boolean boxIsGrabbed() {
         return mVrepSignalGrab == 1;
+    }
+
+    private boolean grabbing(float speed) {
+        return speed >= 0;
+    }
+
+    private void releaseBox() {
+        mVrepSignalGrab = 0;
     }
 
     private static void sleep(int milliseconds) {
