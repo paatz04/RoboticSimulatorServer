@@ -1,8 +1,8 @@
 package simulator.received;
 
 import simulator.received.data.ReceivedConnectionData;
-import transfer.TransferDataConverter;
-import transfer.TransferDataConverterException;
+import simulator.received.dataconverter.TransferDataConverter;
+import simulator.received.dataconverter.TransferDataConverterException;
 import vrep.VRepController;
 
 

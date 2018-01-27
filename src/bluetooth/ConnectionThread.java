@@ -12,7 +12,7 @@ import javax.microedition.io.StreamConnection;
 
 public class ConnectionThread extends Thread implements DataInputStreamListenerCaller{
 
-    private ConnectionCaller mCaller;
+    private ConnectionThreadCaller mCaller;
     private StreamConnection mStreamConnection;
     private DataInputStreamListener mInputStreamListener;
     private DataOutputStream mOutputStream;
@@ -35,7 +35,7 @@ public class ConnectionThread extends Thread implements DataInputStreamListenerC
         return mStopped;
     }
 
-    public void startConnectionThread(ConnectionCaller caller) {
+    public void startConnectionThread(ConnectionThreadCaller caller) {
         mCaller = caller;
         start();
     }

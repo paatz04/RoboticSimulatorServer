@@ -20,22 +20,22 @@ public class MockVRepController {
 
     public void setSpeedGrab(float speed) {
         System.out.println("SpeedGrab: " + speed);
-//        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_BLUE, 3));
+        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_BLUE, 3));
     }
 
     public void setSpeedTip(float speed) {
         System.out.println("SpeedTip: " + speed);
-//        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_BLUE, 1));
+        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_BLUE, 1));
     }
 
     public void setSpeedRotation(float speed) {
         System.out.println("SpeedRotation: " + speed);
-//        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_BLUE, 2));
+        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_RED, 2));
     }
 
     public void setSpeedBody(float speed) {
         System.out.println("SpeedBody: " + speed);
-//        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_BLUE, 4));
+        mCallerMock.addReceivedSimulatorData(new ReceivedSimulatorData(RoboticSensorPart.SCORE_RED, 4));
     }
 
 }

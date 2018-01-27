@@ -1,7 +1,7 @@
 package simulator;
 
 import bluetooth.ConnectionThread;
-import bluetooth.ConnectionCaller;
+import bluetooth.ConnectionThreadCaller;
 import bluetooth.BluetoothManager;
 import bluetooth.BluetoothManagerException;
 import simulator.received.ReceivedConnectionDataHandler;
@@ -11,18 +11,18 @@ import vrep.VRepController;
 import vrep.VRepControllerCaller;
 import vrep.VRepControllerException;
 
-import java.util.EmptyStackException;
-import java.util.Stack;
+import java.util.*;
 
-public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerCaller {
+
+public class RoboticSimulatorServer implements ConnectionThreadCaller, VRepControllerCaller {
     private VRepController mSimulator;
     private BluetoothManager mBluetoothManager;
     private ConnectionThread mConnection;
 
     private boolean mStopped = false;
 
-    private Stack<String> mReceivedConnectionData = new Stack<>();
-    private Stack<ReceivedSimulatorData> mReceivedSimulatorData = new Stack<>();
+    private Queue<String> mReceivedConnectionData = new LinkedList<>();
+    private Queue<ReceivedSimulatorData> mReceivedSimulatorData = new LinkedList<>();
 
     private ReceivedConnectionDataHandler mReceivedConnectionDataHandler;
     private ReceivedSimulatorDataHandler mReceivedSimulatorDataHandler;
@@ -33,6 +33,7 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
     }
 
     public void startRoboticSimulatorServer() throws RoboticSimulatorServerException {
+        System.out.println("RoboticSimulatorServer started");
         startSimulatorThread();
         startBluetoothManager();
         run();
@@ -55,7 +56,7 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
         }
     }
 
-    public synchronized void stopRoboticSimulatorServer() {
+    private synchronized void stopRoboticSimulatorServer() {
         mStopped = true;
         notify();
     }
@@ -63,14 +64,16 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
     private void run() {
         while(!mStopped) {
             try {
+                System.out.println("RoboticSimulatorServer wait for new connection");
                 mConnection = mBluetoothManager.getBluetoothConnection();
+                System.out.println("RoboticSimulatorServer got new connection");
                 handleConnection();
                 mConnection.stopConnection();
                 mConnection = null;
             } catch (BluetoothManagerException e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println("Server: Connection Closed");
+            System.out.println("RoboticSimulatorServer connection closed");
         }
         if (mConnection != null)
             mConnection.stopConnection();
@@ -98,27 +101,27 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
     private void handleReceivedConnectionData() {
         try {
             mReceivedConnectionDataHandler.handle(popReceivedConnectionData());
-        } catch (EmptyStackException ignored) { }
+        } catch (NoSuchElementException ignored) { }
     }
 
     private synchronized String popReceivedConnectionData() {
-        return mReceivedConnectionData.pop();
+        return mReceivedConnectionData.remove();
     }
 
     private void handleReceivedSimulatorData() {
         try {
             mReceivedSimulatorDataHandler.handle(popReceivedSimulatorData());
-        } catch (EmptyStackException ignored) {}
+        } catch (NoSuchElementException ignored) {}
     }
 
     private synchronized ReceivedSimulatorData popReceivedSimulatorData() {
-        return mReceivedSimulatorData.pop();
+        return mReceivedSimulatorData.remove();
     }
 
     private synchronized void waitForData() {
         if (mReceivedConnectionData.size() + mReceivedSimulatorData.size() > 0) {
             try {
-                wait();
+                wait(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -126,12 +129,12 @@ public class RoboticSimulatorServer implements ConnectionCaller, VRepControllerC
     }
 
     public synchronized void addReceivedConnectionData(String receivedData) {
-        mReceivedConnectionData.push(receivedData);
+        mReceivedConnectionData.add(receivedData);
         notify();
     }
 
     public synchronized void addReceivedSimulatorData(ReceivedSimulatorData receivedData) {
-        mReceivedSimulatorData.push(receivedData);
+        mReceivedSimulatorData.add(receivedData);
         notify();
     }
 }

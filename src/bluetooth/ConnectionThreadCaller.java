@@ -1,5 +1,5 @@
 package bluetooth;
 
-public interface ConnectionCaller {
+public interface ConnectionThreadCaller {
     void addReceivedConnectionData(String received);
 }

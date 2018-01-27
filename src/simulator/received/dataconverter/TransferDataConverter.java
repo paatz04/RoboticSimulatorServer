@@ -8,6 +8,10 @@ import simulator.received.data.RoboticSensorPart;
 public class TransferDataConverter {
 
     public static ReceivedConnectionData getReceivedBluetoothData(String receivedString) throws TransferDataConverterException {
+        System.out.println(receivedString);
+        if (receivedString == null)
+            throw new TransferDataConverterException("Received data is null");
+
         String[] partsReceivedString = receivedString.split("=");
         if (partsReceivedString.length == 2)
             return handleReceivedBluetoothDataParts(partsReceivedString[0], partsReceivedString[1]);
