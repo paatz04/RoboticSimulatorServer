@@ -1,4 +1,4 @@
-package transfer;
+package simulator.received.dataconverter;
 
 public class TransferDataConverterException extends Exception {
     TransferDataConverterException(String message) {

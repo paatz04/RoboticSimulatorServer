@@ -1,4 +1,4 @@
-package transfer;
+package simulator.received.dataconverter;
 
 public class TransferredColors {
     public final static int RED = 1;

@@ -2,8 +2,8 @@ package simulator.received;
 
 import bluetooth.ConnectionThread;
 import simulator.received.data.ReceivedSimulatorData;
-import transfer.TransferDataConverter;
-import transfer.TransferDataConverterException;
+import simulator.received.dataconverter.TransferDataConverter;
+import simulator.received.dataconverter.TransferDataConverterException;
 
 public class ReceivedSimulatorDataHandler {
 

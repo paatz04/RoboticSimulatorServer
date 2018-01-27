@@ -57,7 +57,6 @@ public class ConnectionThread extends Thread implements DataInputStreamListenerC
         }
         System.out.println("ConnectionThread finished");
         closeAllConnections();
-        stopConnection();
     }
 
     private void initOutPutStream() throws IOException {
@@ -74,7 +73,7 @@ public class ConnectionThread extends Thread implements DataInputStreamListenerC
     private void handleConnection() {
         while (!mStopped) {
             handleReceivedData();
-            handleDataToBeSend();
+            handleDataToBeSent();
             if (!mStopped)
                 waitForData();
         }
@@ -83,16 +82,18 @@ public class ConnectionThread extends Thread implements DataInputStreamListenerC
     private void handleReceivedData() {
         try {
             mCaller.addReceivedConnectionData(popReceivedData());
-        } catch (EmptyStackException ignored) { ; }
+        } catch (EmptyStackException ignored) { }
     }
 
     private synchronized String popReceivedData() {
         return mReceivedData.pop();
     }
 
-    private void handleDataToBeSend() {
+    private void handleDataToBeSent() {
         try {
-            mOutputStream.writeUTF(popDataToBeSend());
+            String dataToBeSent = popDataToBeSent();
+            mOutputStream.writeUTF(dataToBeSent);
+            System.out.println("Sended: " + dataToBeSent);
         } catch (IOException e) {
             e.printStackTrace();
             stopConnection();
@@ -100,7 +101,7 @@ public class ConnectionThread extends Thread implements DataInputStreamListenerC
 
     }
 
-    private synchronized String popDataToBeSend() {
+    private synchronized String popDataToBeSent() {
         return mDataToBeSent.pop();
     }
 

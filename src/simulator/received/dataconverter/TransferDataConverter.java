@@ -1,11 +1,9 @@
-package transfer;
+package simulator.received.dataconverter;
 
 import simulator.received.data.ReceivedConnectionData;
 import simulator.received.data.ReceivedSimulatorData;
 import simulator.received.data.RoboticArmPart;
 import simulator.received.data.RoboticSensorPart;
-
-import static simulator.received.data.RoboticSensorPart.COLOR_GRAB;
 
 public class TransferDataConverter {
 

@@ -29,7 +29,6 @@ public class DataInputStreamListener extends Thread {
         mCaller.dataInputStreamStopped();
     }
 
-    @Nullable
     private String waitForInputStreamData() {
         try {
             return mInputStream.readUTF();

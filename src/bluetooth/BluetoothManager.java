@@ -17,6 +17,7 @@ public class BluetoothManager {
     public BluetoothManager() {}
 
     public void startBluetoothManager() throws BluetoothManagerException {
+        System.out.println("BluetoothManager started");
         try {
             setLocalBluetoothDeviceDiscoverable();
             setUpServerToListenForConnections();
