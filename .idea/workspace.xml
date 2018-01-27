@@ -4,12 +4,8 @@
     <list default="true" id="2eec7d38-c304-4261-a32a-4565c068a1e8" name="Default" comment="Merge branch 'master' of https://github.com/paatz04/RoboticSimulatorServer&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/vrep/VRepController.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/roboticArmSimulator.ttt" afterPath="$PROJECT_DIR$/roboticArmSimulator.ttt" />
-      <change beforePath="$PROJECT_DIR$/src/bluetooth/ConnectionCaller.java" afterPath="$PROJECT_DIR$/src/bluetooth/ConnectionThreadCaller.java" />
-      <change beforePath="$PROJECT_DIR$/src/bluetooth/ConnectionThread.java" afterPath="$PROJECT_DIR$/src/bluetooth/ConnectionThread.java" />
-      <change beforePath="$PROJECT_DIR$/src/simulator/RoboticSimulatorServer.java" afterPath="$PROJECT_DIR$/src/simulator/RoboticSimulatorServer.java" />
-      <change beforePath="$PROJECT_DIR$/src/simulator/received/ReceivedConnectionDataHandler.java" afterPath="$PROJECT_DIR$/src/simulator/received/ReceivedConnectionDataHandler.java" />
-      <change beforePath="$PROJECT_DIR$/src/simulator/received/dataconverter/TransferDataConverter.java" afterPath="$PROJECT_DIR$/src/simulator/received/dataconverter/TransferDataConverter.java" />
-      <change beforePath="$PROJECT_DIR$/src/vrep/MockVRepController.java" afterPath="$PROJECT_DIR$/src/vrep/MockVRepController.java" />
+      <change beforePath="$PROJECT_DIR$/src/simulator/received/dataconverter/TransferredColors.java" afterPath="$PROJECT_DIR$/src/simulator/received/dataconverter/TransferredColors.java" />
+      <change beforePath="$PROJECT_DIR$/src/vrep/VRepController.java" afterPath="$PROJECT_DIR$/src/vrep/VRepController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/src/simulator/RoboticSimulatorServer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="84">
-              <caret line="113" column="51" lean-forward="true" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
+              <caret line="113" column="51" lean-forward="false" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4174#4175#0" expanded="true" />
@@ -39,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/src/bluetooth/ConnectionThread.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="952">
-              <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#829#830#0" expanded="true" />
@@ -96,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/src/vrep/MockVRepController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#stopVRepController#0;class#MockVRepController#0" expanded="false" />
@@ -597,7 +593,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="1045" width="1922" height="1116" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22166999" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -607,8 +602,8 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32676348" sideWeight="0.5021299" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3081511" sideWeight="0.4978701" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3081511" sideWeight="0.4978701" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32902583" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902583" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -715,7 +710,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="19" lean-forward="true" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -917,7 +912,7 @@
         <state relative-caret-position="272">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -965,7 +960,7 @@
     <entry file="file://$PROJECT_DIR$/src/vrep/MockVRepController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#stopVRepController#0;class#MockVRepController#0" expanded="false" />
@@ -1020,7 +1015,7 @@
     <entry file="file://$PROJECT_DIR$/src/simulator/RoboticSimulatorServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
-          <caret line="113" column="51" lean-forward="true" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
+          <caret line="113" column="51" lean-forward="false" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4174#4175#0" expanded="true" />
@@ -1032,7 +1027,7 @@
     <entry file="file://$PROJECT_DIR$/src/bluetooth/ConnectionThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
-          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#829#830#0" expanded="true" />
