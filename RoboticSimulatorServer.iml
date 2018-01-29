@@ -25,5 +25,15 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="RoboticSimulatorServer" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/redist/annotations-java8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
