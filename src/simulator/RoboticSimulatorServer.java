@@ -119,7 +119,7 @@ public class RoboticSimulatorServer implements ConnectionThreadCaller, VRepContr
     }
 
     private synchronized void waitForData() {
-        if (mReceivedConnectionData.size() + mReceivedSimulatorData.size() > 0) {
+        if (mReceivedConnectionData.size() + mReceivedSimulatorData.size() == 0) {
             try {
                 wait(1000);
             } catch (InterruptedException e) {

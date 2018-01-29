@@ -105,12 +105,16 @@ public class VRepController {
     public void setSpeedTip(float speed) {
         System.out.println("VREP.TIP\t" + speed);
         mInFloats.getArray()[0] = speed;
+        long time = System.currentTimeMillis();
         int result=mVrep.simxCallScriptFunction(mClientID,SIMULATOR_SCENE_OBJECT, remoteApi.sim_scripttype_childscript,
                                                 "setSpeedTip_function",null,mInFloats,
                                                 null,null,null,null,null,
                                                 null, remoteApi.simx_opmode_blocking);
+        System.out.println("setSpeedTip:" + (System.currentTimeMillis() - time));
         checkStatusCode(result);
         checkCounterSignals();
+
+        System.out.println(System.currentTimeMillis() - time);
     }
 
     public void setSpeedBody(float speed) {

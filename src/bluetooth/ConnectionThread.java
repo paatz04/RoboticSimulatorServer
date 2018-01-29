@@ -106,7 +106,7 @@ public class ConnectionThread extends Thread implements DataInputStreamListenerC
     }
 
     private synchronized void waitForData() {
-         if (mReceivedData.size() + mDataToBeSent.size() > 0) {
+         if (mReceivedData.size() + mDataToBeSent.size() == 0) {
              try {
                  wait();
              } catch (InterruptedException e) {
