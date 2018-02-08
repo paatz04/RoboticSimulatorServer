@@ -22,7 +22,7 @@ Patric Corletto, Hannes Oberprantache, Jose Acevedo
 Sebastian Eckl
 
 # Wiki
-https://github.com/paatz04/RoboticSimulatorController/wiki
+https://github.com/paatz04/RoboticSimulatorServer/wiki
 
 
 
