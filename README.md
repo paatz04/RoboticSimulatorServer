@@ -1,3 +1,9 @@
+# RoboticSimulatorServer
+
+# Description
+This is the Simulator Server, used to controll the communication between the App and the V-REP simulation. The Server only works on devices that support Bluetooth and on which runs the V-REP simulation.
+
+# Installation
 Make sure you have following files in your directory, in order to run the various examples:
 
 1. folder "coppelia"
@@ -9,3 +15,15 @@ You might also have to add the folder to the system path. In Linux for instance,
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`
 
 before executing simpleTest.
+
+# Credits
+Patric Corletto, Hannes Oberprantache, Jose Acevedo
+
+Sebastian Eckl
+
+# Wiki
+https://github.com/paatz04/RoboticSimulatorController/wiki
+
+
+
+
