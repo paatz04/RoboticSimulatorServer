@@ -14,7 +14,8 @@ You might also have to add the folder to the system path. In Linux for instance,
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`
 
-before executing simpleTest.
+# Run the program
+To start the server, the simulation should already run and the Bluetooth should be turned on. Afterwards the server can be started and its possible for other devices to connect with them.
 
 # Credits
 Patric Corletto, Hannes Oberprantache, Jose Acevedo
